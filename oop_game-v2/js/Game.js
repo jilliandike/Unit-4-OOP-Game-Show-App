@@ -28,7 +28,8 @@ class Game {
 
     startGame(){
         document.getElementById('overlay').style.display = 'none';
-        this.activePhrase = new Phrase (this.getRandomPhrase());
+        let newRandomPhrase = this.getRandomPhrase();
+        this.activePhrase = new Phrase (newRandomPhrase.phrase);
         this.activePhrase.addPhraseToDisplay();
-    }
+    }  
 }

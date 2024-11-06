@@ -28,6 +28,14 @@
 // const phrase = new Phrase(randomPhrase.phrase);
 // phrase.addPhraseToDisplay();
 
-const game = new Game();
-game.startGame();
-console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
+// const game = new Game();
+// game.startGame();
+// console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
+
+//Starts a new game and displays the hidden phrase when the Start Game button is clicked.
+let game;
+
+document.getElementById('btn__reset').addEventListener('click', () => {
+    game = new Game()
+    game.startGame();
+});
