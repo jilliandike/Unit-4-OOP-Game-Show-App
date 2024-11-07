@@ -32,4 +32,13 @@ class Game {
         this.activePhrase = new Phrase (newRandomPhrase.phrase);
         this.activePhrase.addPhraseToDisplay();
     }  
+    // checkForWin(){
+        
+    // }
+    // removeLife(){
+
+    // }
+    // gameOver(){
+
+    // }
 }
