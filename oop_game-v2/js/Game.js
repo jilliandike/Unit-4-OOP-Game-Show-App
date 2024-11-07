@@ -20,6 +20,7 @@ class Game {
         ];
         this.activePhrase = null;
     }
+    
     getRandomPhrase() {
         let randomNumber = Math.floor(Math.random()* this.phrases.length);
         const randomPhrase = this.phrases[randomNumber];
@@ -32,13 +33,33 @@ class Game {
         this.activePhrase = new Phrase (newRandomPhrase.phrase);
         this.activePhrase.addPhraseToDisplay();
     }  
-    // checkForWin(){
+    
+    checkForWin(){
+        if (document.getElementsByClassName('hide').length === 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    removeLife(){
+        this.missed += 1;
+        document.getElementsByClassName('tries')[`${this.missed-1}`].firstElementChild.src = 'images/lostHeart.png';
         
-    // }
-    // removeLife(){
+        if(this.missed === 5){
+            gameOver('lose');
+        }
+    }
+   
+    gameOver(ending){  //this is not working yet
+        document.getElementById('overlay').style.display = '';
 
-    // }
-    // gameOver(){
-
-    // }
+        if (ending === 'win'){
+            document.getElementById("game-over-message").textContent = "Congrats! You didn't Panic At The Disco and you won!"
+            document.getElementsByClassName(start) = 'win';
+        } else {
+            document.getElementById("game-over-message").textContent = "Bummer, an All Time Low. Want to try again?"
+            document.getElementsByClassName(start) = 'lose';
+        }
+    }
 }
