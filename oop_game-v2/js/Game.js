@@ -20,13 +20,16 @@ class Game {
         ];
         this.activePhrase = null;
     }
-    
+ 
+    //Applies a random number to return a random phrase
     getRandomPhrase() {
         let randomNumber = Math.floor(Math.random()* this.phrases.length);
         const randomPhrase = this.phrases[randomNumber];
         return randomPhrase;
     }
 
+    //When you click Start Game, this hides the start screen, returns a random phrase, 
+    //and adds the phrase to the display
     startGame(){
         document.getElementById('overlay').style.display = 'none';
         let newRandomPhrase = this.getRandomPhrase();
@@ -34,6 +37,7 @@ class Game {
         this.activePhrase.addPhraseToDisplay();
     }  
     
+    //Checks to see if all the letters are revealed and the game is won
     checkForWin(){
         if (document.getElementsByClassName('hide').length === 0){
             return true;
@@ -42,24 +46,30 @@ class Game {
         }
     }
     
+    //Removes a life by replacing blue hearts with gray hearts
+    //Calls Game Over method when all hearts have been replaced
     removeLife(){
         this.missed += 1;
         document.getElementsByClassName('tries')[`${this.missed-1}`].firstElementChild.src = 'images/lostHeart.png';
-        
-        if(this.missed === 5){
-            gameOver('lose');
+
+        if(this.missed == 5){
+            this.gameOver(false);
         }
     }
    
-    gameOver(ending){  //this is not working yet
-        document.getElementById('overlay').style.display = '';
+    //When the game ends with a win or a loss, this displays the correct messaging
+    gameOver(gameWon){  
+        let overlay = document.getElementById('overlay');
+        let message = document.getElementById('game-over-message');
+    
+        overlay.style.display = '';
 
-        if (ending === 'win'){
-            document.getElementById("game-over-message").textContent = "Congrats! You didn't Panic At The Disco and you won!"
-            document.getElementsByClassName(start) = 'win';
+        if (!gameWon) { //this is working but could be problematic - delete this comment at the end if still working
+            message.textContent = "Bummer, an All Time Low. Want to try again?";
+            overlay.classList.add('lose');
         } else {
-            document.getElementById("game-over-message").textContent = "Bummer, an All Time Low. Want to try again?"
-            document.getElementsByClassName(start) = 'lose';
+            message.textContent = "Congrats! You didn't Panic At The Disco and you won!";
+            overlay.classList.add('win');
         }
     }
 }
