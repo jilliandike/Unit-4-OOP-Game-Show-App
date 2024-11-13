@@ -72,4 +72,37 @@ class Game {
             overlay.classList.add('win');
         }
     }
+    
+    //Check to see if button clicked matches the letter in the phrase and update the phrase and lives accordingly.
+    handleInteraction(selectedLetter) {
+        const allKeys = document.getElementsByClassName("key");
+        const keyArray = Array.from(allKeys);
+
+        keyArray.forEach(key => {
+            
+            //If the button matches the letter, disable the button. 
+            if (key.textContent === selectedLetter){
+                key.disabled = true;
+                
+                /* 
+                Check if the letter is in the phrase. 
+                If it is, update the class to chosen, display the letter, and check to see if the player 
+                won the game.
+                If it isn't, updated the class to wrong and remove a life.
+                */
+                if(this.activePhrase.checkLetter(selectedLetter)){
+                    key.classList.add('chosen');
+                    this.activePhrase.showMatchedLetter(selectedLetter);
+                    this.checkForWin();
+                        if(this.checkForWin()){
+                            this.gameOver(true)
+                        }
+                } else {
+                    key.classList.add('wrong');
+                    this.removeLife();
+                }
+            }    
+        });
+   }
+
 }

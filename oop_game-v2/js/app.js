@@ -39,3 +39,9 @@ document.getElementById('btn__reset').addEventListener('click', () => {
     game = new Game()
     game.startGame();
 });
+
+document.getElementById('qwerty').addEventListener('click', (e) => {
+    if(e.target.classList.contains('key')) {
+        game.handleInteraction(e.target.textContent);
+    }
+});
