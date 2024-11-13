@@ -32,8 +32,7 @@ class Game {
     //and adds the phrase to the display
     startGame(){
         document.getElementById('overlay').style.display = 'none';
-        let newRandomPhrase = this.getRandomPhrase();
-        this.activePhrase = new Phrase (newRandomPhrase.phrase);
+        this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
     }  
     
@@ -66,10 +65,10 @@ class Game {
 
         if (!gameWon) {
             message.textContent = "Bummer, an All Time Low. Want to try again?";
-            overlay.classList.add('lose');
+            overlay.className = 'lose';
         } else {
             message.textContent = "Congrats! You didn't Panic At The Disco and you won!";
-            overlay.classList.add('win');
+            overlay.className = 'win';
         }
 
         this.resetGame();
