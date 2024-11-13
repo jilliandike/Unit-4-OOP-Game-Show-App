@@ -64,16 +64,18 @@ class Game {
     
         overlay.style.display = '';
 
-        if (!gameWon) { //this is working but could be problematic - delete this comment at the end if still working
+        if (!gameWon) {
             message.textContent = "Bummer, an All Time Low. Want to try again?";
             overlay.classList.add('lose');
         } else {
             message.textContent = "Congrats! You didn't Panic At The Disco and you won!";
             overlay.classList.add('win');
         }
+
+        this.resetGame();
     }
     
-    //Check to see if button clicked matches the letter in the phrase and update the phrase and lives accordingly.
+    //Checks to see if button clicked matches the letter in the phrase and update the phrase and lives accordingly
     handleInteraction(selectedLetter) {
         const allKeys = document.getElementsByClassName("key");
         const keyArray = Array.from(allKeys);
@@ -103,6 +105,30 @@ class Game {
                 }
             }    
         });
+   }
+
+   //Resets the gameboard so that a new game will start when clicking the Start Game button
+   resetGame(){
+        const ul = document.querySelector("#phrase ul");
+        ul.innerHTML = '';
+    
+        const allKeys = document.getElementsByClassName("key");
+        const keyArray = Array.from(allKeys);
+
+        keyArray.forEach(key => {
+            key.disabled = false;
+            key.classList.add('key');
+            key.classList.remove('wrong', 'chosen');
+        });
+
+        const hearts = document.getElementsByClassName('tries');
+        const heartsArray = Array.from(hearts);
+
+        heartsArray.forEach(heart => {
+            heart.firstElementChild.src = 'images/liveHeart.png'
+        });
+
+        this.missed = 0;
    }
 
 }
